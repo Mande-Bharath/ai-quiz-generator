@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: ai-quiz-generator-backend
+    env: python
+    plan: free
+    repo: "<GITHUB_OWNER>/<REPO>"
+    branch: main
+    root: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT --proxy-headers"
+  - type: static_site
+    name: ai-quiz-generator-frontend
+    plan: free
+    repo: "<GITHUB_OWNER>/<REPO>"
+    branch: main
+    root: frontend
+    buildCommand: "npm ci && npm run build"
+    publishPath: "dist"
+databases:
+  - name: ai_quiz_db
+    engine: postgresql
+    plan: free
