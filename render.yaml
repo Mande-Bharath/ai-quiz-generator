@@ -3,7 +3,7 @@ services:
     name: ai-quiz-generator-backend
     env: python
     plan: free
-    repo: "<GITHUB_OWNER>/<REPO>"
+    repo: "Mande-Bharath/ai-quiz-generator"
     branch: main
     root: backend
     buildCommand: "pip install -r requirements.txt"
@@ -11,11 +11,15 @@ services:
   - type: static_site
     name: ai-quiz-generator-frontend
     plan: free
-    repo: "<GITHUB_OWNER>/<REPO>"
+    repo: "Mande-Bharath/ai-quiz-generator"
     branch: main
     root: frontend
+    # run npm in the frontend working dir (no `cd frontend`)
     buildCommand: "npm ci && npm run build"
     publishPath: "dist"
+    envVars:
+      - key: VITE_API_BASE
+        value: "https://ai-quiz-generator-023l.onrender.com"
 databases:
   - name: ai_quiz_db
     engine: postgresql
