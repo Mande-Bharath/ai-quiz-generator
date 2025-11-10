@@ -13,7 +13,10 @@ app = FastAPI(title="AI Quiz Generator")
 # Configure CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite's default port
+    allow_origins=[
+        "http://localhost:5173",  # Local development
+        "https://ai-quiz-generator-frontend.onrender.com",  # Render frontend URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
